@@ -55,6 +55,8 @@ body{
     font-weight: 600;
 }
 
+/*----------------------------------------------- LOGIN E CADASTROS -----------------------------------------------------------*/
+
 #login-opt{
     width: 22%;
     display: flex;
@@ -66,7 +68,10 @@ body{
     padding: 35px 30px;
     border-radius: 20px;
     width: 30%;
-    margin: 250px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .login-input{
@@ -109,3 +114,41 @@ body{
    margin-bottom: 15px;
 }
 
+/*----------------------------------------------- ÁREA PROFISSIONAL -----------------------------------------------------------*/
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 5%;
+    border-bottom: solid rgba(255, 255, 255, 0.253) .5px;
+}
+
+header h1{
+    font-weight: 800;
+    font-size: 40px;
+}
+
+header a{
+    text-decoration: none;
+    color: white;
+    padding: 0 20px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+header a:hover{
+    color: rgb(0, 107, 0);
+    font-weight: 700;
+}
+
+
+#container{
+    width: 75%;
+    margin: 60px auto
+}
+
+b{
+    color: rgb(0, 107, 0);
+    font-weight: 800;
+}
