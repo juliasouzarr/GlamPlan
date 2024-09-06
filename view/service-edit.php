@@ -47,10 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="container-login">
         <h1>Editar Serviço</h1>
-        <form action="../view/service-edit.php?id=<?= $service['id']; ?>" method="POST">
-            <input type="text" placeholder="Nome do serviço" class="login-input" name="service" value="<?= htmlspecialchars($service['name']); ?>" required>
-            <input type="text" placeholder="Duração média" class="login-input" name="duration" value="<?= htmlspecialchars($service['duration']); ?>">
-            <input type="text" placeholder="Valor médio" class="login-input" name="value" value="<?= htmlspecialchars($service['value']); ?>" required>
+        <form action="../view/service-edit.php?id=<?= $services['id']; ?>" method="POST">
+            <input type="text" placeholder="Nome do serviço" class="login-input" name="service" value="<?= htmlspecialchars($services['name']); ?>" required>
+            <input type="text" placeholder="Duração média" class="login-input" name="duration" value="<?= htmlspecialchars($services['duration']); ?>">
+            <input type="text" placeholder="Valor médio" class="login-input" name="value" value="<?= htmlspecialchars($services['value']); ?>" required>
             <button type="submit" class="login-btn">Atualizar</button>
         </form>
         <p><a href="service-data.php">Voltar</a></p>
