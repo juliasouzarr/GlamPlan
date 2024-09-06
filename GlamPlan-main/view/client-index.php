@@ -13,8 +13,8 @@
         <h1>Seja bem vindo(a), <b>Cliente</b></h1>
         <!-- PRIORIDADE MENOR: ADICIONAR PHP PARA PERSONALIZAR O NOME DE ACORDO COM O USUÁRIO LOGADO -->
         <div>
-            <a href="client-data">Atualizar Dados</a>
-            <a href="#">Agendar serviço</a>
+            <a href="client-data.php">Atualizar Dados</a>
+            <a href="schedule-view.php">Agendar serviço</a>
            
         </div>
     </header>

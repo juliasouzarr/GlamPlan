@@ -60,6 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="login-btn">Atualizar</button>
         </form>
         <p><a href="professional-data.php">Voltar</a></p>
+       <p> <a href="service-register.php">Cadastrar Serviço</a> </p>
+   
+      <p>  <a href="schedule-register-service.php">Cadastrar Horários</a> </p>
+   
     </div>
 </body>
 </html>

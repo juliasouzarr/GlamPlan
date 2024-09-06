@@ -8,12 +8,12 @@ if (!$id) {
 }
 
 // Recupera o serviço
-$sql = "SELECT * FROM service WHERE id = ?";
+$sql = "SELECT * FROM services WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
-$service = $stmt->fetch(PDO::FETCH_ASSOC);
+$services = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$service) {
+if (!$services) {
     die("Serviço não encontrado.");
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Atualiza o serviço
-    $sql = "UPDATE service SET name = ?, duration = ?, value = ? WHERE id = ?";
+    $sql = "UPDATE services SET name = ?, duration = ?, value = ? WHERE id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$name, $duration, $value, $id]);
 
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="container-login">
         <h1>Editar Serviço</h1>
-        <form action="service-edit.php?id=<?= $service['id']; ?>" method="POST">
+        <form action="../view/service-edit.php?id=<?= $service['id']; ?>" method="POST">
             <input type="text" placeholder="Nome do serviço" class="login-input" name="service" value="<?= htmlspecialchars($service['name']); ?>" required>
             <input type="text" placeholder="Duração média" class="login-input" name="duration" value="<?= htmlspecialchars($service['duration']); ?>">
             <input type="text" placeholder="Valor médio" class="login-input" name="value" value="<?= htmlspecialchars($service['value']); ?>" required>

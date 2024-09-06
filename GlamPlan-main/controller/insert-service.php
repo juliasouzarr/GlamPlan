@@ -1,6 +1,9 @@
 <?php
 include '../model/conexao.php'; // Inclua o arquivo de conexão com o banco de dados
 
+// Obtém a instância da conexão
+$pdo = Conexao::get_instance();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtém os dados do formulário
     $name = $_POST['service'] ?? '';
@@ -13,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepara a consulta para inserção
-    $sql = "INSERT INTO service (name, duration, value) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO services (name, duration, value) VALUES (?, ?, ?)";
 
     try {
         // Prepara e executa a consulta

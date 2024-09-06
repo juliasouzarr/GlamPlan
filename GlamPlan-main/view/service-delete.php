@@ -8,7 +8,7 @@ if (!$id) {
 }
 
 // Exclui o serviço
-$sql = "DELETE FROM service WHERE id = ?";
+$sql = "DELETE FROM services WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 

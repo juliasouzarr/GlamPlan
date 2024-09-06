@@ -62,6 +62,7 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <h1>GlamPlan</h1>
         <a href="client-register.php">Cadastro novo cliente</a>
+        <a href="schedule-view.php">Agendar Horário</a>
         <a href="client-index.php">Voltar</a>
     </header>
     <div id="container">

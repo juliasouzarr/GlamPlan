@@ -62,7 +62,11 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <h1>GlamPlan</h1>
         <a href="client-register.php">Cadastro novo profissional</a>
+        <a href="service-register.php">Cadastrar Serviço</a>
+        <a href="professional-page-update.php">Atualizar</a>
+        <a href="schedule-register-service.php">Cadastrar Horários</a>
         <a href="client-index.php">Voltar</a>
+        
     </header>
     <div id="container">
         <h1>Alterar meus dados</h1>

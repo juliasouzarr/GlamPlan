@@ -2,7 +2,7 @@
 include '../model/conexao.php'; // Inclua o arquivo de conexão com o banco de dados
 
 // Recupera todos os serviços
-$sql = "SELECT * FROM service";
+$sql = "SELECT * FROM services";
 $stmt = $pdo->query($sql);
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
