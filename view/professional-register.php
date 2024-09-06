@@ -12,7 +12,7 @@
    
     <div id="container-login">
         <h1>Crie sua conta</h1>
-        <form action="#">
+        <form action="../controller/insert-professional.php" method="post">
             <input type="text" placeholder="Como você gostaria de ser chamado(a)?" class="login-input" name="name">
             <input type="text" placeholder="Nome de usuário *" class="login-input" name="user" required>
             <input type="password" placeholder="Senha *" class="login-input" name="password" required>
