@@ -1,6 +1,6 @@
 <?php
-include '../model/conexao.php'; // Inclua o arquivo de conexão com o banco de dados
-
+include '../model/conexao.php'; 
+$pdo = Conexao::get_instance();
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" placeholder="Valor médio" class="login-input" name="value" value="<?= htmlspecialchars($services['value']); ?>" required>
             <button type="submit" class="login-btn">Atualizar</button>
         </form>
-        <p><a href="service-data.php">Voltar</a></p>
+        <p><a href="professional-index.php">Voltar</a></p>
     </div>
 </body>
 </html>

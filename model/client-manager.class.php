@@ -2,6 +2,7 @@
 
 require_once 'conexao.php'; // Inclua o arquivo de conexão
 
+
 class ClientManager extends Conexao
 {
     public function insert_client($data)
@@ -17,6 +18,7 @@ class ClientManager extends Conexao
         
         if ($userExists) {
             throw new Exception("O nome de usuário já está em uso.");
+            
         }
         
         // Corrige o SQL para garantir que os parâmetros correspondam
@@ -52,10 +54,15 @@ class ClientManager extends Conexao
         return $statement->fetchAll(PDO::FETCH_ASSOC); // Retorne como array associativo
     }
 
-    public function list_client_by_id($id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function list_client_by_id($id)
+    {
+        $pdo = parent::get_instance();   
+        $sql = "SELECT * FROM client WHERE id = :id";
+        $statement = $pdo->prepare($sql);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 
     public function delete_client($id)

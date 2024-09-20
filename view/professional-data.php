@@ -1,6 +1,6 @@
 <?php
 include '../model/conexao.php';
-
+$pdo = Conexao::get_instance();
 $sql = "SELECT * FROM professional";
 $stmt = $pdo->query($sql);
 $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -56,15 +56,18 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .btn-delete:hover {
             background-color: #e53935;
         }
+      
     </style>
 </head>
 <body>
     <header>
         <h1>GlamPlan</h1>
-        <a href="client-register.php">Cadastro novo profissional</a>
+        <div>
         <a href="service-register.php">Cadastrar Serviço</a>
         <a href="schedule-register-service.php">Cadastrar Horários</a>
-        <a href="client-index.php">Voltar</a>
+        <a href="professional-index.php">Voltar</a>
+        </div>
+       
     </header>
     <div id="container">
         <h1>Meus Dados Profissionais</h1>
@@ -91,7 +94,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($professional['expertise']); ?></td>
                     <td>
                         <a href="professional-page-update.php?id=<?= $professional['id']; ?>" class="btn-edit">Editar</a>
-                        <a href="../controller/delete-professional.php?id=<?= $professional['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta conta profissional?');">Excluir</a>
+                        <a href="../controller/delete-professional.php?id=<?= $professional['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta conta profissional?');">Excluir Conta</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

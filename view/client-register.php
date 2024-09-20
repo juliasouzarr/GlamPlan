@@ -17,11 +17,11 @@
             <input type="text" placeholder="Nome de usuário *" class="login-input" name="user" required>
             <input type="password" placeholder="Senha *" class="login-input" name="password" required>
             <input type="email" placeholder="Email *" class="login-input" name="email" required>
-            <input type="text" placeholder="Celular" class="login-input" name="phone" required>
+            <input type="text" placeholder="Celular" class="login-input" name="phone" >
             <label for="birth">Data de Nascimento:</label>
-            <input type="date" class="login-input" name="birth" required>
-            <input type="text" placeholder="Endereço" class="login-input" name="address" required>
-            <input type="text" placeholder="Bairro" class="login-input" name="district" required>
+            <input type="date" class="login-input" name="birth" >
+            <input type="text" placeholder="Endereço" class="login-input" name="address" >
+            <input type="text" placeholder="Bairro" class="login-input" name="district" >
             <button type="submit" class="login-btn">Registrar</button>
         </form>
         <p>Já possui uma conta? <a href="client-login.php">Faça login!</a></p>

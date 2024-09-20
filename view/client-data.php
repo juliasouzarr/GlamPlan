@@ -1,6 +1,8 @@
 <?php
 include '../model/conexao.php';
 
+$pdo = Conexao::get_instance();
+
 $sql = "SELECT * FROM client";
 $stmt = $pdo->query($sql);
 $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);

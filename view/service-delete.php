@@ -1,17 +1,15 @@
 <?php
-include '../model/conexao.php'; // Inclua o arquivo de conexão com o banco de dados
-
+include '../model/conexao.php'; 
+$pdo = Conexao::get_instance();
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
     die("ID do serviço não fornecido.");
 }
-
-// Exclui o serviço
 $sql = "DELETE FROM services WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$id]);
 
-header("Location: ../view/service-data.php"); // Redireciona para a página de listagem
+header("Location: ../view/professional-login.php"); 
 exit();
 ?>

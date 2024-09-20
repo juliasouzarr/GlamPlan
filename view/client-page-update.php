@@ -1,6 +1,12 @@
+<?php 
+include("../model/client-session.php");
+$sessao = new Sessao();
+$sessao->valida_login();
+?>
+
 <?php
 include '../model/conexao.php';
-
+$pdo = Conexao::get_instance();
 $id = $_GET['id'] ?? null;
 
 if (!$id) {

@@ -1,8 +1,7 @@
 <?php
-include '../model/conexao.php'; // Conecta ao banco de dados
-
-// Consulta para obter todos os serviços
+include '../model/conexao.php'; 
 $sql = "SELECT id, name, duration, value FROM services";
+$pdo = Conexao::get_instance();
 $stmt = $pdo->query($sql);
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -16,7 +15,7 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>GlamPlan</title>
     <link rel="stylesheet" href="../assets/style.css">
     <style>
-        /* Estilos básicos para a tabela */
+     
         table {
             width: 100%;
             border-collapse: collapse;
@@ -26,7 +25,7 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
             padding: 8px;
         }
         th {
-            background-color:#9613df;
+            background-color: rgba(0, 107, 0, 0.8);;
         }
         .btn-edit, .btn-delete {
             text-decoration: none;
@@ -36,10 +35,10 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
             margin: 0 5px;
         }
         .btn-edit {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50; 
         }
         .btn-delete {
-            background-color: #f44336; /* Red */
+            background-color: #f44336; 
         }
         .btn-delete:hover {
             background-color: #c62828;
@@ -53,25 +52,22 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- PRIORIDADE MENOR: ADICIONAR PHP PARA PERSONALIZAR O NOME DE ACORDO COM O USUÁRIO LOGADO -->
         <div>
             <a href="service-register.php">Cadastrar Serviço</a>
-            <a href="professional-data.php">Atualizar Dados</a>
-            <a href="schedule-register-service.php">Cadastrar Horários</a>
-            <a href="#">Vincular Empresa</a>
-            <a href="#">Área do Cliente</a>
+            <a href="professional-data.php">Atualizar Meus Dados</a>
+            <a href="schedule-register-service.php">Meus Horários</a>
+           
         </div>
     </header>
 
     <div id="container">
         <div id="container-services">
             <h1>Seus Serviços</h1>
-
-            <!-- Exibe a tabela de serviços cadastrados -->
             <table>
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Duração</th>
                         <th>Valor</th>
-                       
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,9 +75,12 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php foreach ($services as $service): ?>
                         <tr>
                             <td><?= htmlspecialchars($service['name']); ?></td>
-                            <td><?= htmlspecialchars($service['duration']); ?></td>
+                            <td><?= htmlspecialchars($service['duration']); ?> min</td>
                             <td><?= htmlspecialchars($service['value']); ?></td>
-                            
+                            <td>
+                        <a href="../view/service-edit.php?id=<?= $service['id']; ?>" class="btn-edit">Editar</a>
+                        <a href="../view/service-delete.php?id=<?= $service['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este serviço?');">Excluir</a>
+                    </td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>

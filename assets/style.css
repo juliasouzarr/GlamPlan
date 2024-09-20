@@ -148,6 +148,10 @@ header a:hover{
     margin: 60px auto
 }
 
+#container h1{
+    margin-bottom: 20px;
+}
+
 b{
     color: rgb(0, 107, 0);
     font-weight: 800;

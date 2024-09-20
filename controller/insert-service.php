@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Prepara e executa a consulta
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$name, $duration, $value]);
-        header("Location: ../view/service-data.php"); // Redireciona para a página de listagem
+        header("Location: ../view/professional-index.php"); // Redireciona para a página de listagem
         exit();
     } catch (PDOException $e) {
         die("Erro ao cadastrar serviço: " . $e->getMessage());

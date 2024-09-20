@@ -7,12 +7,41 @@ class ProfessionalManager extends Conexao
     public function insert_professional($data)
     {
         $pdo = parent::get_instance();
-        $sql = "INSERT INTO professional (name, user, password, cpf, email, phone, expertise) VALUES (:name, :user, :password, :cpf, :email, :phone, :expertise)";
-        $statement = $pdo->prepare($sql);
-        foreach ($data as $key => $value) {
-            $statement->bindValue(":$key", $value);
+    
+        // Verifica se o nome de usuário já existe
+        $checkSql = "SELECT COUNT(*) FROM professional WHERE user = :user";
+        $checkStmt = $pdo->prepare($checkSql);
+        $checkStmt->bindParam(':user', $data['user']);
+        $checkStmt->execute();
+        $userExists = $checkStmt->fetchColumn();
+        
+        if ($userExists) {
+            throw new Exception("O nome de usuário já está em uso.");
+            
         }
-        $statement->execute();
+        
+        // Corrige o SQL para garantir que os parâmetros correspondam
+        $sql = "INSERT INTO professional (name, user, password, cpf, email, phone, expertise) 
+                VALUES (:name, :user, :password, :cpf, :email, :phone, :expertise)";
+        
+        $stmt = $pdo->prepare($sql);
+    
+        // Vincula os parâmetros
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':user', $data['user']);
+        $stmt->bindParam(':password', $data['password']); // Corrigido para usar o valor diretamente
+        $stmt->bindParam(':cpf', $data['cpf']);
+        $stmt->bindParam(':email', $data['email']);
+        $stmt->bindParam(':phone', $data['phone']);
+        $stmt->bindParam(':expertise', $data['expertise']);
+        
+        // Executa a query
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            // Trata exceções de execução da query
+            die("Erro ao inserir dados no banco de dados: " . $e->getMessage());
+        }
     }
 
     public function list_professional()
@@ -71,4 +100,3 @@ class ProfessionalManager extends Conexao
     $statement->execute();
 }
 }
-?>

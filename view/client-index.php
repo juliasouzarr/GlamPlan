@@ -1,3 +1,11 @@
+<?php 
+include ("../model/client-session.php");
+
+
+$sessao = new Sessao();
+$sessao->valida_login();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -14,6 +22,7 @@
         <!-- PRIORIDADE MENOR: ADICIONAR PHP PARA PERSONALIZAR O NOME DE ACORDO COM O USUÁRIO LOGADO -->
         <div>
             <a href="client-data.php">Atualizar Dados</a>
+            <a href="client-view.php">Profissionais Disponíveis</a>
             <a href="schedule-view.php">Agendar serviço</a>
            
         </div>

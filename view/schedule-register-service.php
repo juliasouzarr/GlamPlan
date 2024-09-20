@@ -1,7 +1,8 @@
 <?php
-include '../model/conexao.php'; // Inclua o arquivo de conexão com o banco de dados
+include '../model/conexao.php';
 
-// Consultar serviços para preencher o dropdown
+
+$pdo = Conexao::get_instance();
 $sql = "SELECT id, name FROM services";
 $stmt = $pdo->query($sql);
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,8 +19,11 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <header>
         <h1>GlamPlan</h1>
+        <div>
         <a href="service-register.php">Cadastrar Serviço</a>
         <a href="professional-index.php">Voltar</a>
+        </div>
+       
     </header>
 
     <div id="container">

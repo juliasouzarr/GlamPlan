@@ -1,6 +1,8 @@
 <?php
 session_start();
-include '../model/conexao.php';
+include ('../model/conexao.php');
+$pdo = Conexao::get_instance();
+
 
 $id = $_GET['id'] ?? null;
 

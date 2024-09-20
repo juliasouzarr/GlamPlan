@@ -1,7 +1,7 @@
 <?php
 include '../model/conexao.php';
+$pdo = Conexao::get_instance();
 
-// Consulta para obter os horários disponíveis
 $sql = "SELECT schedules.id, schedules.date, schedules.time, services.name AS service
         FROM schedules
         JOIN services ON schedules.service_id = services.id
@@ -12,13 +12,9 @@ $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $schedule_id = $_POST['schedule_id'];
     $client_name = $_POST['client_name'];
-
-    // Atualiza o horário como indisponível
     $sql = "UPDATE schedules SET available = 0 WHERE id = ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$schedule_id]);
-
-    // Insere o agendamento
+    $stmt->execute([$schedule_id]);  
     $sql = "INSERT INTO appointments (schedule_id, client_name) VALUES (?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$schedule_id, $client_name]);
