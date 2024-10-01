@@ -1,7 +1,8 @@
 <?php
 
 require_once 'conexao.php'; // Inclua o arquivo de conexão
-
+class ClientManager extends Conexao
+{
     public function insert_professional($data)
     {
         $pdo = parent::get_instance();
@@ -96,4 +97,5 @@ require_once 'conexao.php'; // Inclua o arquivo de conexão
     $statement->bindValue(":id", $data['id']);
     
     $statement->execute();
+}
 }
