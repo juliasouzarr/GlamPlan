@@ -3,8 +3,6 @@
 require_once 'conexao.php'; // Inclua o arquivo de conexão
 
 
-class ClientManager extends Conexao
-{
     public function insert_client($data)
     {
         $pdo = parent::get_instance();
@@ -99,5 +97,5 @@ class ClientManager extends Conexao
         $statement->bindValue(":id", $data['id']);
         $statement->execute();
     }
-}
+
 ?>
