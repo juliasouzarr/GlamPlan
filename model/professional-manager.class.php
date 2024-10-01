@@ -1,7 +1,7 @@
 <?php
 
 require_once 'conexao.php'; // Inclua o arquivo de conexão
-class ClientManager extends Conexao
+class ProfessionalManager extends Conexao
 {
     public function insert_professional($data)
     {
