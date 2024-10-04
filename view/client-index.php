@@ -22,8 +22,10 @@ $sessao->valida_login();
         <!-- PRIORIDADE MENOR: ADICIONAR PHP PARA PERSONALIZAR O NOME DE ACORDO COM O USUÁRIO LOGADO -->
         <div>
             <a href="client-data.php">Atualizar Dados</a>
+
             <a href="client-view.php">Profissionais Disponíveis</a>
             <a href="schedule-view.php">Agendar serviço</a>
+            <a href="leave.php">Sair</a>
            
         </div>
     </header>

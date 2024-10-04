@@ -7,9 +7,9 @@ if (!$id) {
     die("ID do serviço não fornecido.");
 }
 $sql = "DELETE FROM services WHERE id = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$id]);
+$stmt = $pdo->prepare(query: $sql);
+$stmt->execute(params: [$id]);
 
-header("Location: ../view/professional-login.php"); 
+header(header: "Location: ../view/professional-index.php"); 
 exit();
 ?>

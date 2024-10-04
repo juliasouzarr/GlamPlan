@@ -5,7 +5,7 @@ $password = $_POST['password'];
 
 session_start();
 
-require_once '../model/client.class.php';
+require_once '../model/professional.class.php';
 
 
 // Verifica se a requisição é do tipo POST
@@ -14,13 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = isset($_POST['user']) ? trim($_POST['user']) : '';
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
     
-    $userModel = new Client();
+    $userModel = new Professional();
     $user = $userModel->login($username, $password);
     
     if ($user) {
         $_SESSION['user'] = $user['user'];
         $_SESSION['password'] = $user['password'];
-        header('Location: ../view/client-index.php');
+        header('Location: ../view/professional-index.php');
         exit;
     } else {
         $_SESSION['error'] = 'Credenciais inválidas. Por favor, tente novamente.';
@@ -29,6 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['error'] = 'Método de requisição inválido.';
 }
 
-require_once '../view/client-login.php';
+require_once '../view/professional-login.php';
 
 

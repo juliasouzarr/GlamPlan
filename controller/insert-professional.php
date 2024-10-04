@@ -3,7 +3,7 @@
 include '../model/conexao.php';
 include '../model/professional-manager.class.php';
 
-$manager = new ProfessionalManager();
+$manager = new Professional();
 
 
 if (!empty($_POST)) {
