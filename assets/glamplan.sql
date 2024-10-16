@@ -22,7 +22,8 @@ CREATE TABLE professional (
     cpf VARCHAR(14) NOT NULL,
     email VARCHAR(100),
     phone VARCHAR(15),
-    expertise VARCHAR(100)
+    expertise VARCHAR(100),
+    favorite boolean default 0
 );
 
 CREATE TABLE services (
@@ -44,22 +45,25 @@ CREATE TABLE password_resets (
 
 CREATE TABLE schedules (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    service_id INT NOT NULL,
+    professional_id int not null,
+    service_id INT,
     date DATE NOT NULL,
     time TIME NOT NULL,
-    available BOOLEAN DEFAULT 1,
-    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
+    avaliable BOOLEAN DEFAULT 1,
+    FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
+    FOREIGN KEY (professional_id) REFERENCES professional(id) ON DELETE CASCADE
 );
 
 CREATE TABLE appointments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     schedule_id INT NOT NULL,
+    client_id INT NOT NULL,
     client_name VARCHAR(255) NOT NULL,
-    FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE CASCADE
+    FOREIGN KEY (schedule_id) REFERENCES schedules(id) ON DELETE CASCADE,
+    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE
 );
 
-CREATE TABLE favoritos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE favorites (
     client_id INT NOT NULL,
     professional_id INT NOT NULL,
     service_id INT NOT NULL,
@@ -67,4 +71,7 @@ CREATE TABLE favoritos (
     FOREIGN KEY (professional_id) REFERENCES professional(id) ON DELETE CASCADE,
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 );
+
+
+
 

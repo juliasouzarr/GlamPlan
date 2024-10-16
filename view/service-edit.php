@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$name, $duration, $value, $id]);
 
-    header("Location:../view/service-data.php"); 
+    header("Location:../view/professional-index.php"); 
     exit();
 }
 ?>

@@ -13,7 +13,7 @@
         <h1>Acesse sua conta</h1>
         <form action="../controller/client-login-controller.php" method="POST">
             <?php if (isset($_SESSION['error'])): ?>
-                <p style="color: red;"><?php echo htmlspecialchars($_SESSION['error']); ?></p>
+                <p style="color: darkred;"><?php echo htmlspecialchars($_SESSION['error']); ?></p>
             <?php endif; ?>
             <input type="text" placeholder="Usuário" class="login-input" name="user" required>
             <input type="password" placeholder="Senha" class="login-input" name="password" required>

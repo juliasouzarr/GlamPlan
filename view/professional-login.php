@@ -17,6 +17,7 @@
             <?php endif; ?>
             <input type="text" placeholder="Usuário" class="login-input" name="user" required>
             <input type="password" placeholder="Senha" class="login-input" name="password" required>
+            
             <button type="submit" class="login-btn">Entrar</button>
         </form>
         <p>Ainda não possui uma conta? <a href="professional-register.php">Cadastre-se!</a></p>

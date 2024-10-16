@@ -13,7 +13,7 @@ $clientId = $_SESSION['user'];
 $pdo = Conexao::get_instance();
 
 $sql = "SELECT p.name AS professional_name, serv.name AS service_name
-        FROM favoritos f
+        FROM favorites f
         JOIN professional p ON f.professional_id = p.id
         JOIN services serv ON f.service_id = serv.id
         WHERE f.client_id = ?";

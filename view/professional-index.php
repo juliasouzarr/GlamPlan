@@ -1,9 +1,23 @@
 <?php
-include '../model/conexao.php'; 
-$sql = "SELECT id, name, duration, value FROM services";
+include '../model/conexao.php';
+include("../model/session.php");
+
+$sessao = new Sessao();
+$sessao->valida_login_profissional();
+
+$username = ($_SESSION['user']);
+
+$sql = "SELECT services.id, services.name, services.duration, value FROM services join professional on services.professional_id = professional.id WHERE user = ?";
 $pdo = Conexao::get_instance();
-$stmt = $pdo->query($sql);
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$username]);
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$name = "SELECT name FROM professional WHERE user = ?";
+$stmt = $pdo->prepare($name);
+$stmt->execute([$username]);
+$professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -15,31 +29,39 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>GlamPlan</title>
     <link rel="stylesheet" href="../assets/style.css">
     <style>
-     
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
         }
+
         th {
-            background-color: rgba(0, 107, 0, 0.8);;
+            background-color: rgba(0, 107, 0, 0.8);
+            ;
         }
-        .btn-edit, .btn-delete {
+
+        .btn-edit,
+        .btn-delete {
             text-decoration: none;
             color: #fff;
             padding: 5px 10px;
             border-radius: 3px;
             margin: 0 5px;
         }
+
         .btn-edit {
-            background-color: #4CAF50; 
+            background-color: #4CAF50;
         }
+
         .btn-delete {
-            background-color: #f44336; 
+            background-color: #f44336;
         }
+
         .btn-delete:hover {
             background-color: #c62828;
         }
@@ -48,13 +70,16 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <header>
-        <h1>Seja bem vindo(a), <b>Julia</b></h1>
+        <?php foreach ($professionals as $professional): ?>
+            <h1>Seja bem vindo(a), <?= htmlspecialchars($professional['name']); ?></h1>
+        <?php endforeach; ?>
         <!-- PRIORIDADE MENOR: ADICIONAR PHP PARA PERSONALIZAR O NOME DE ACORDO COM O USUÁRIO LOGADO -->
         <div>
             <a href="service-register.php">Cadastrar Serviço</a>
             <a href="professional-data.php">Atualizar Meus Dados</a>
             <a href="schedule-register-service.php">Meus Horários</a>
-           
+            <a href="leave.php" onclick="return confirm('Tem certeza que deseja sair da sua conta?');">Sair</a>
+
         </div>
     </header>
 
@@ -73,15 +98,15 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                     <?php if (count($services) > 0): ?>
                         <?php foreach ($services as $service): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($service['name']); ?></td>
-                            <td><?= htmlspecialchars($service['duration']); ?> min</td>
-                            <td><?= htmlspecialchars($service['value']); ?></td>
-                            <td>
-                        <a href="../view/service-edit.php?id=<?= $service['id']; ?>" class="btn-edit">Editar</a>
-                        <a href="../view/service-delete.php?id=<?= $service['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este serviço?');">Excluir</a>
-                    </td>
-                        </tr>
+                            <tr>
+                                <td><?= htmlspecialchars($service['name']); ?></td>
+                                <td><?= htmlspecialchars($service['duration']); ?> min</td>
+                                <td><?= htmlspecialchars($service['value']); ?></td>
+                                <td>
+                                    <a href="../view/service-edit.php?id=<?= $service['id']; ?>" class="btn-edit">Editar</a>
+                                    <a href="../view/service-delete.php?id=<?= $service['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este serviço?');">Excluir</a>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>

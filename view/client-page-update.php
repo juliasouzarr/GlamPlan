@@ -1,7 +1,7 @@
 <?php 
-include("../model/client-session.php");
+include("../model/session.php");
 $sessao = new Sessao();
-$sessao->valida_login();
+$sessao->valida_login_cliente();
 ?>
 
 <?php

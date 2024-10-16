@@ -1,10 +1,16 @@
 <?php 
-include ("../model/client-session.php");
-
-
+include '../model/conexao.php';
+include ("../model/session.php");
 $sessao = new Sessao();
-$sessao->valida_login();
+$sessao->valida_login_cliente();
+$pdo = Conexao::get_instance();
+$username = ($_SESSION['user']);
+$sql = "SELECT * FROM client WHERE user = ?";
+$stmt = $pdo->prepare($sql);         
+$stmt->execute([$username]);
+$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,14 +24,14 @@ $sessao->valida_login();
 
 <body>
     <header>
-        <h1>Seja bem vindo(a), <b>Cliente</b></h1>
-        <!-- PRIORIDADE MENOR: ADICIONAR PHP PARA PERSONALIZAR O NOME DE ACORDO COM O USUÁRIO LOGADO -->
+    <?php foreach ($clients as $client): ?>
+        <h1>Seja bem vindo(a),  <?= htmlspecialchars($client['name']); ?></h1>
+        <?php endforeach; ?>
+      
         <div>
-            <a href="client-data.php">Atualizar Dados</a>
-
+            <a href="client-data.php">Meus Dados</a>
             <a href="client-view.php">Profissionais Disponíveis</a>
-            <a href="schedule-view.php">Agendar serviço</a>
-            <a href="leave.php">Sair</a>
+            <a href="leave.php" onclick="return confirm('Tem certeza que deseja sair da sua conta?');">Sair</a>
            
         </div>
     </header>

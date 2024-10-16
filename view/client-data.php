@@ -1,10 +1,13 @@
 <?php
 include '../model/conexao.php';
-
+include ("../model/session.php");
+$sessao = new Sessao();
+$sessao->valida_login_cliente();
 $pdo = Conexao::get_instance();
-
-$sql = "SELECT * FROM client";
-$stmt = $pdo->query($sql);
+$username = ($_SESSION['user']);
+$sql = "SELECT * FROM client WHERE user = ?";
+$stmt = $pdo->prepare($sql);         
+$stmt->execute([$username]);
 $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -13,7 +16,7 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes Cadastrados</title>
+    <title>Meus Dados</title>
     <link rel="stylesheet" href="../assets/style.css">
     <style>
         table {
@@ -58,17 +61,21 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .btn-delete:hover {
             background-color: #e53935;
         }
+        #delete{
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>GlamPlan</h1>
-        <a href="client-register.php">Cadastro novo cliente</a>
-        <a href="schedule-view.php">Agendar Horário</a>
+    <h1>GlamPlan</h1>
+        <div>
+        <a href="schedule-view.php">Agendar Serviço</a>
         <a href="client-index.php">Voltar</a>
+        </div>
     </header>
     <div id="container">
-        <h1>Alterar meus dados</h1>
+        <h1>Meus Dados</h1>
         <table>
             <thead>
                 <tr>
@@ -94,12 +101,13 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($client['district']); ?></td>
                     <td>
                         <a href="client-page-update.php?id=<?= $client['id']; ?>" class="btn-edit">Editar</a>
-                        <a href="../controller/delete-client.php?id=<?= $client['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir a conta?');">Excluir</a>
+                       
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <a id="delete" href="../controller/delete-client.php?id=<?= $client['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir a conta?');">Excluir Minha Conta</a>
     </div>
 </body>
 </html>
