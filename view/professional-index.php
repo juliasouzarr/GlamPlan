@@ -77,7 +77,8 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div>
             <a href="service-register.php">Cadastrar Serviço</a>
             <a href="professional-data.php">Atualizar Meus Dados</a>
-            <a href="schedule-register-service.php">Meus Horários</a>
+           <!-- <a href="schedule-register-service.php">Meus Horários</a> -->
+            <a href="professional-schedule.php">Minha Agenda</a>
             <a href="leave.php" onclick="return confirm('Tem certeza que deseja sair da sua conta?');">Sair</a>
 
         </div>

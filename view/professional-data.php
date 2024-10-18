@@ -73,7 +73,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>GlamPlan</h1>
         <div>
         <a href="service-register.php">Cadastrar Serviço</a>
-        <a href="schedule-register-service.php">Meus Horários</a>
+        <a href="professional-schedule.php">Minha Agenda</a>
         <a href="professional-index.php">Voltar</a>
         </div>
        

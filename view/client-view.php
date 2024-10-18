@@ -39,6 +39,10 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
             background-color: #45a049;
         }
 
+        tr:hover #agendar{
+            background-color: darkgreen;
+        }
+
         thead {
             background-color: #45a049;
         }
@@ -71,6 +75,8 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         #acao {
             width: 15%;
         }
+
+        
     </style>
 </head>
 
@@ -79,8 +85,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>GlamPlan</h1>
         <div>
             <a href="client-data.php">Atualizar Dados</a>
-            <a href="client-view.php">Profissionais Disponíveis</a>
-            <a href="schedule-view.php">Agendar serviço</a>
+            <a href="client-view.php">Agendar Serviço</a>
             <a href="client-index.php">Voltar</a>
         </div>
     </header>
@@ -106,10 +111,10 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= htmlspecialchars($professional['phone']); ?></td>
                             <td><?= htmlspecialchars($professional['expertise']); ?></td>
                             <td id='acoes'>
-                                <form action="../controller/favorite-professional.php" method="POST">
+                                <form action="../view/client-schedule.php" method="POST">
                                     <input type="hidden" name="client_id" value="<?= $_SESSION['user']; ?>">
                                     <input type="hidden" name="professional_id" value="<?= $professional['id']; ?>">
-                                    <button type="submit" class="btn btn-danger">Agendar</button>
+                                    <button id="agendar" type="submit" class="btn btn-danger">Agendar</button>
                                 </form>
                                 <form action="../controller/favorite-professional.php" method="POST">
                                     <input type="hidden" name="client_id" value="<?= $_SESSION['user']; ?>">

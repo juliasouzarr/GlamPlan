@@ -30,7 +30,7 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
       
         <div>
             <a href="client-data.php">Meus Dados</a>
-            <a href="client-view.php">Profissionais Disponíveis</a>
+            <a href="client-view.php">Agendar Serviço</a>
             <a href="leave.php" onclick="return confirm('Tem certeza que deseja sair da sua conta?');">Sair</a>
            
         </div>
