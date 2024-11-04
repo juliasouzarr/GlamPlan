@@ -1,10 +1,15 @@
 <?php
+
 session_start(); // Iniciar a sessão
 include '../model/conexao.php';
 $pdo = Conexao::get_instance();
 $sql = "SELECT * FROM professional";
 $stmt = $pdo->query($sql);
 $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT * FROM client";
+$stmt = $pdo->query($sql);
+$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -105,6 +110,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach ($professionals as $professional): ?>
+                        
                         <tr>
                             <td><?= htmlspecialchars($professional['name']); ?></td>
                             <td><?= htmlspecialchars($professional['email']); ?></td>
@@ -117,7 +123,9 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <button id="agendar" type="submit" class="btn btn-danger">Agendar</button>
                                 </form>
                                 <form action="../controller/favorite-professional.php" method="POST">
-                                    <input type="hidden" name="client_id" value="<?= $_SESSION['user']; ?>">
+                                <?php foreach ($clients as $client): ?>
+                                    <input type="hidden" name="client_id" value="<?= $client['id'];?>">
+                                    <?php endforeach; ?>
                                     <input type="hidden" name="professional_id" value="<?= $professional['id']; ?>">
                                     <button type="submit" class="btn btn-success">Favoritar</button>
                                 </form>

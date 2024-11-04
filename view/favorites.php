@@ -1,5 +1,17 @@
 <?php
 include '../model/conexao.php';
+include ("../model/session.php");
+
+$sessao = new Sessao();
+$sessao->valida_login_cliente();
+$pdo = Conexao::get_instance();
+$username = ($_SESSION['user']);
+$sql = "SELECT * FROM client WHERE user = ?";
+$stmt = $pdo->prepare($sql);         
+$stmt->execute([$username]);
+$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 session_start();
 
 // Verificar se o usuário está logado
@@ -8,14 +20,12 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$clientId = $_SESSION['user'];
-
 $pdo = Conexao::get_instance();
 
-$sql = "SELECT p.name AS professional_name, serv.name AS service_name
+
+$sql = "SELECT p.name AS professional_name
         FROM favorites f
         JOIN professional p ON f.professional_id = p.id
-        JOIN services serv ON f.service_id = serv.id
         WHERE f.client_id = ?";
 
 $stmt = $pdo->prepare($sql);
@@ -82,7 +92,8 @@ $favoriteProfessionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .alert {
             margin-top: 20px;
             background-color: rgba(255, 255, 255, 0.2);
-            color: gray;
+            color: white;
+            font-weight: 700;
             border-radius: 8px;
             padding: 10px;
         }
@@ -144,7 +155,7 @@ $favoriteProfessionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <ul class="list-group">
                 <?php foreach ($favoriteProfessionals as $fav): ?>
                     <li class="list-group-item">
-                        Profissional: <?= htmlspecialchars($fav['professional_name']) ?> - Serviço: <?= htmlspecialchars($fav['service_name']) ?>
+                        Profissional: <?= htmlspecialchars($fav['professional_name']) ?> 
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -152,7 +163,7 @@ $favoriteProfessionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Você ainda não favoritou nenhum profissional.</p>
         <?php endif; ?>
 
-        <a href="client-index.php" class="btn"> Voltar para Agendamento</a>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
