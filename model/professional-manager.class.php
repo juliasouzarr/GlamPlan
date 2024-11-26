@@ -44,6 +44,40 @@ class Professional extends Conexao
         }
     }
 
+    public function insert_professional_default_schedule($professional_id)
+    {
+        $pdo = parent::get_instance();
+    
+        $sql = "INSERT INTO schedules (professional_id, time) 
+                VALUES
+                (:professional_id, 08:00),
+                (:professional_id,09:00),
+                (:professional_id,10:00),
+                (:professional_id,11:00),
+                (:professional_id,12:00),
+                (:professional_id,13:00),
+                (:professional_id,14:00),
+                (:professional_id,15:00),
+                (:professional_id,16:00),
+                (:professional_id,17:00),
+                (:professional_id,18:00),
+                (:professional_id,19:00)
+                ";
+        
+        $stmt = $pdo->prepare($sql);
+    
+        // Vincula os parâmetros
+        $stmt->bindParam(':professional_id', $professional_id);
+        
+        // Executa a query
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            // Trata exceções de execução da query
+            die("Erro ao inserir horários padrão no banco de dados: " . $e->getMessage());
+        }
+    }
+
     public function list_professional()
     {
         $pdo = parent::get_instance();

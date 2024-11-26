@@ -47,7 +47,7 @@ CREATE TABLE schedules (
     id INT AUTO_INCREMENT PRIMARY KEY,
     professional_id int not null,
     service_id INT,
-    date DATE NOT NULL,
+    date DATE,
     time TIME NOT NULL,
     avaliable BOOLEAN DEFAULT 1,
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
@@ -72,6 +72,48 @@ CREATE TABLE favorites (
     FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE
 );
 
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS generate_daily_schedules
+ON SCHEDULE EVERY 1 DAY
+STARTS CURRENT_DATE + INTERVAL 1 DAY
+DO
+BEGIN
+    DECLARE start_time TIME DEFAULT '08:00:00';
+    DECLARE end_time TIME DEFAULT '20:00:00';
+    DECLARE interval_minutes INT DEFAULT 60;
+    DECLARE current_time TIME;
+    DECLARE professional_id INT;
+
+    DECLARE professional_cursor CURSOR FOR SELECT id FROM professional;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    SET done = FALSE;
+    SET current_time = start_time;
+
+    -- Cursor para iterar por todos os profissionais
+    OPEN professional_cursor;
+
+    fetch_loop: LOOP
+        FETCH professional_cursor INTO professional_id;
+        IF done THEN
+            LEAVE fetch_loop;
+        END IF;
+
+        WHILE current_time < end_time DO
+            INSERT INTO schedules (professional_id, date, time, avaliable, service_id)
+            VALUES (professional_id, CURRENT_DATE, current_time, 1, NULL);
+            SET current_time = ADDTIME(current_time, MAKETIME(interval_minutes, 0, 0));
+        END WHILE;
+
+        -- Resetar horário para o próximo profissional
+        SET current_time = start_time;
+    END LOOP;
+
+    CLOSE professional_cursor;
+END $$
+
+DELIMITER ;
 
 
 

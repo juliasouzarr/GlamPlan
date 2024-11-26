@@ -108,6 +108,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </tbody>
         </table>
+
         <a id='delete' href="../controller/delete-professional.php?id=<?= $professional['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta conta profissional?');">Excluir Conta</a>
     </div>
 </body>

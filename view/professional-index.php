@@ -102,7 +102,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><?= htmlspecialchars($service['name']); ?></td>
                                 <td><?= htmlspecialchars($service['duration']); ?> min</td>
-                                <td><?= htmlspecialchars($service['value']); ?></td>
+                                <td>R$ <?= htmlspecialchars($service['value']); ?></td>
                                 <td>
                                     <a href="../view/service-edit.php?id=<?= $service['id']; ?>" class="btn-edit">Editar</a>
                                     <a href="../view/service-delete.php?id=<?= $service['id']; ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este serviço?');">Excluir</a>

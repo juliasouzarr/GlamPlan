@@ -70,7 +70,7 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
     <h1>GlamPlan</h1>
         <div>
-        <a href="schedule-view.php">Agendar Serviço</a>
+        <a href="client-view.php">Agendar Serviço</a>
         <a href="client-index.php">Voltar</a>
         </div>
     </header>

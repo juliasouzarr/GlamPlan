@@ -9,6 +9,8 @@
 body{
     background-image: url(../assets/images/fundo2.png);
     color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #intro{
@@ -24,7 +26,7 @@ body{
 
 #intro-container h1{
     font-weight: 900;
-    font-size: 150px;
+    font-size: 130px;
 }
 
 #intro-container h2{
@@ -61,7 +63,7 @@ body{
 /*----------------------------------------------- LOGIN E CADASTROS -----------------------------------------------------------*/
 
 #login-opt{
-    width: 22%;
+    width: 20%;
     display: flex;
     justify-content: space-between;
 }

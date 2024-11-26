@@ -90,7 +90,6 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>GlamPlan</h1>
         <div>
             <a href="client-data.php">Atualizar Dados</a>
-            <a href="client-view.php">Agendar Serviço</a>
             <a href="client-index.php">Voltar</a>
         </div>
     </header>
@@ -112,7 +111,7 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($professionals as $professional): ?>
                         
                         <tr>
-                            <td><?= htmlspecialchars($professional['name']); ?></td>
+                            <td><?= htmlspecialchars($professional['user']); ?></td>
                             <td><?= htmlspecialchars($professional['email']); ?></td>
                             <td><?= htmlspecialchars($professional['phone']); ?></td>
                             <td><?= htmlspecialchars($professional['expertise']); ?></td>
@@ -122,12 +121,13 @@ $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <input type="hidden" name="professional_id" value="<?= $professional['id']; ?>">
                                     <button id="agendar" type="submit" class="btn btn-danger">Agendar</button>
                                 </form>
-                                <form action="../controller/favorite-professional.php" method="POST">
-                                <?php foreach ($clients as $client): ?>
+                               <!-- <form action="../controller/favorite-professional.php" method="POST">
+                             <?php foreach ($clients as $client): ?>
                                     <input type="hidden" name="client_id" value="<?= $client['id'];?>">
                                     <?php endforeach; ?>
                                     <input type="hidden" name="professional_id" value="<?= $professional['id']; ?>">
                                     <button type="submit" class="btn btn-success">Favoritar</button>
+                                -->
                                 </form>
                             </td>
                         </tr>
